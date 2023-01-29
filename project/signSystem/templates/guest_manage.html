@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Guest Manage Page</title>
+        {% load bootstrap3 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+
+    <body role="document">
+        <!--Navigator Bar-->
+        <nav class="nav bar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/event_manage/">Guest Manage System</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/event_manage/">Events</a></li>
+                        <li class="active"><a href="#">Guests</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Hola, {{user}}</a></li>
+                        <li><a href="/logout/">Exit</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!--Guest List Search Bar-->
+        <div class="page-header" style="padding-top: 60px; padding-left: 30px; padding-right: 30px;">
+            <div id="navbar" class="navbar-collapse collapse">
+                <form class="navbar-form" method="get" action="/search_guest_name/">
+                    <div class="form-group">
+                        <input name="name" type="text" placeholder="Guest Name" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <!--Guest Lists-->
+        <div class="row" style="padding-top: 80px; padding-left: 30px; padding-right: 30px;">
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th><th>Name</th><th>Phone</th><th>Email</th><th>Signed</th><th>Event</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for g in guests %}
+                        <tr>
+                            <td>{{g.id}}</td>
+                            <td>{{g.realname}}</td>
+                            <td>{{g.phone}}</td>
+                            <td>{{g.email}}</td>
+                            <td>{{g.sign}}</td>
+                            <td>{{g.event_id}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--Paginator-->
+        <div class="pagination" style="padding-left: 30px;">
+            <span class="step-links">
+            <ul class="pagination">
+                {% if guests.has_previous %}
+                <li><a href="?page={{ guests.previous_page_number }}">&laquo;</a></li>
+                {% endif %}
+
+                <li><a href="#">{{ guests.number }}</a></li>
+
+                {% if guests.has_next %}
+                    <li><a href="?page={{ guests.next_page_number }}">&raquo;</a></li>
+                {% endif %}
+
+                <li><a href="#">Total: {{ guests.paginator.num_pages }} pages</a></li>
+            </ul>
+            </span>
+        </div>
+
+    </body>
+
+</html>

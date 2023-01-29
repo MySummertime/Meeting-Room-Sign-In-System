@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Home Page</title>
+    </head>
+
+    <body>
+        <h1>Meeting Room Sign In</h1>
+        <form method="post" action="/login/">
+            {% csrf_token %}
+            <span>Name</span><input name="user" type="text" placeholder="Your name"><br>
+            <span>Password</span><input name="pwd" type="password" placeholder="Your password"><br>
+            <span style="color: brown;">{{err}}</span><br>
+            <button id="btn" type="submit">Log in</button>
+        </form>
+
+    </body>
+
+</html>
