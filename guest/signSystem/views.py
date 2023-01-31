@@ -60,7 +60,7 @@ def searchEventName(req):
     user = req.session.get('user', '')
     search_name = req.GET.get('name', '')
     #print(user, search_name)
-    lst = Event.objects.filter(name__icontains=search_name) # 包含,忽略大小写
+    lst = Event.objects.filter(name__icontains=search_name) # ignore letter case
     print(lst)
     return render(req, 'event_manage.html', {'user': user, 'events': lst})
 
@@ -133,7 +133,7 @@ def searchGuestName(req):
     user = req.session.get('user', '')
     search_name = req.GET.get('name', '')
     #print(user, search_name)
-    lst = Guest.objects.filter(realname__icontains=search_name) # 包含,忽略大小写
+    lst = Guest.objects.filter(realname__icontains=search_name) # ignore letter case
     #print(lst)
     return render(req, 'guest_manage.html', {'user': user, 'guests': lst})
 
